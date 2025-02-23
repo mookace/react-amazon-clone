@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from './Carousel';
 import HomePageCard from './HomePageCard';
 import CarouselCategory from './CarouselCategory';
+import CarouselProduct from './CarouselProduct';
 
 const HomePage = () => {
   return (
@@ -59,7 +60,15 @@ const HomePage = () => {
             />
           </div>
         </div>
+        <CarouselProduct />
         <CarouselCategory />
+        <div className="h-[200px]">
+          <img
+            className="h-[100%] m-auto"
+            src="../images/banner_image.jpg"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   );
