@@ -1,6 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HomePage, NavBar } from './components';
+import {
+  HomePage,
+  NavBar,
+  Checkout,
+  ProductPage,
+  SearchResults,
+} from './components';
 
 const App = () => {
   return (
@@ -8,6 +14,9 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<HomePage />}></Route>
+        <Route path="/search" element={<SearchResults />}></Route>
+        <Route path="/product" element={<ProductPage />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
       </Routes>
     </BrowserRouter>
   );
