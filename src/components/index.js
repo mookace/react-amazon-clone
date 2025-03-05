@@ -10,3 +10,4 @@ export { default as SearchResults } from './SearchResults.jsx';
 export { default as Checkout } from './Checkout.jsx';
 export { default as ProductDetails } from './ProductDetails.jsx';
 export { default as ProductBadge } from './ProductBadge.jsx';
+export { default as ProductRating } from './ProductRating.jsx';
