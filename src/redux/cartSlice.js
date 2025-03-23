@@ -10,12 +10,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      //   state.products.push(action.payload);
-      //   state.productsNumber += 1;
+      state.productsNumber = state.productsNumber + 1;
     },
-    removeFromCart: (state, action) => {
-      // remove from cart
-    },
+    removeFromCart: (state, action) => {},
   },
 });
 
