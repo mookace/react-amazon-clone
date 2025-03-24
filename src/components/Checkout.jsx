@@ -1,19 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProductDetails } from './';
 import { GB_CURRENCY } from '../utils/Constants';
+import { removeFromCart } from '../redux/cartSlice';
 
 function Checkout() {
   const products = useSelector((state) => state.cart.products);
   const itemNumber = useSelector((state) => state.cart.productsNumber);
-  // const subTotal=
+  const subTotal = useSelector((state) =>
+    state.cart.products.reduce(
+      (subTotal, product) => subTotal + product.price * product.quantity,
+      0
+    )
+  );
+
+  const dispatch = useDispatch();
 
   return (
     <div className="h-screen bg-amazonclone-background">
       <div className="min-w-[1000px] max-w-[1500px] m-auto pt-8">
-        <div className="grid grid-cols-8 bg-white gap-10">
+        <div className="grid grid-cols-8 gap-10">
           {/* products */}
-          <div className="col-span-6">
+          <div className="col-span-6 bg-white">
             <div className="text-2xl xl:text-3xl m-4">Shopping Cart</div>
             {products.map((product) => {
               return (
@@ -36,7 +44,12 @@ function Checkout() {
                           </Link>
                         </div>
                         <div>
-                          <button>Delete</button>
+                          <button
+                            className="text-sm xl:text-base font-semibold text-blue-500 mt-2 mb-1"
+                            onClick={() => dispatch(removeFromCart(product.id))}
+                          >
+                            Delete
+                          </button>
                         </div>
                         <div className="grid grid-cols-3 w-20 text-center">
                           <div className="text-xl xl:text-2xl bg-gray-400 rounded">
@@ -63,11 +76,26 @@ function Checkout() {
 
             <div className="text-lg xl:text-xl text-right mb-4 mr-4">
               SubTotal ({itemNumber} items):{' '}
-              <span className="font-semibold">0</span>
+              <span className="font-semibold">
+                {GB_CURRENCY.format(subTotal)}
+              </span>
             </div>
           </div>
           {/* checkout */}
-          <div className="col-span-2 bg-white rounded h-[250px]"></div>
+          <div className="col-span-2 bg-white rounded h-[250px] p-7">
+            <div className="text-xs xl:text-sm text-green-800 mb-2">
+              Your order qualifies for
+              <span className="font-bold"> FREE Delivery</span>. Delivery
+              Details
+            </div>
+            <div className="text-base xl:text-lg mb-4">
+              SubTotal ({itemNumber} items):{' '}
+              <span className="font-semibold">
+                {GB_CURRENCY.format(subTotal)}
+              </span>
+            </div>
+            <button className="btn">Proceed to Checkout</button>
+          </div>
         </div>
       </div>
     </div>
